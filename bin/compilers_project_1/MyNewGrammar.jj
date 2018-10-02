@@ -1,0 +1,85 @@
+/**
+ * JavaCC template file created by SF JavaCC plugin 1.5.28+ wizard for JavaCC 1.5.0+
+ */options{  static = true;}PARSER_BEGIN(MyNewGrammar)package compilers_project_1;
+
+public class MyNewGrammar{
+  static int[] _switch = new int[51];
+  static char[] _symbol = new char[1000];
+  static int[] _next = new int[1000];
+    public static void main(String args []) throws ParseException  {    MyNewGrammar parser = new MyNewGrammar(System.in);    while (true)    {      System.out.println("Reading from standard input...");      try      {        MyNewGrammar.Start();
+        System.out.println ("MyNewGrammar: The input was readed sucessfully.");      }      catch (Exception e)      {        System.out.println("NOK.");        System.out.println(e.getMessage());        MyNewGrammar.ReInit(System.in);      }      catch (Error e)      {        System.out.println("Oops.");        System.out.println(e.getMessage());        break;      }    }  }}PARSER_END(MyNewGrammar)SKIP :{  " "| "\r"| "\t"| "\n"}TOKEN : /* OPERATORS */{  < _plus : "+" >| < _minus : "-" >| < _multiplication : "*" >| < _division : "/" >
+| < _mod : "%" >
+| < _assignop : "=" >
+| < _semicolon : ";" >
+| < _comma : "," >
+| < _period : "." >
+| < _leftparen : "(" >
+| < _rightparen : ")" >
+| < _leftbracket : "[" >
+| < _rightbracket : "]" >
+| < _leftbrace : "{" >
+| < _rightbrace : "}" >}
+
+TOKEN : /* LOGICAL */
+{
+  < _less : "<" >
+| < _lessequal : "<=" >
+| < _greater : ">" >
+| < _greaterequal : ">=" >
+| < _equal : "==" >
+| < _notequal : "!=" >
+| < _and : "&&" >
+| < _or : "||" >
+| < _not : "!" >
+}
+
+TOKEN : /* RESERVED */
+{
+  < _boolean : "boolean" >
+| < _break : "break" >
+| < _class : "class" >
+| < _double : "double" >
+| < _else : "else" >
+| < _extends : "extends" >
+| < _for : "for" >
+| < _if : "if" >
+| < _implements : "implements" >
+| < _int : "int" >
+| < _interface : "interface" >
+| < _new : "new" >
+| < _newarray : "newarray" >
+| < _null : "null" >
+| < _println : "println" >
+| < _readln : "readln" >
+| < _return : "return" >
+| < _string : "string" >
+| < _void : "void" >
+| < _while : "while" >
+}TOKEN : /* IDENTIFIER */{  < _id : < LETTER >(< LETTER >|< DIGIT >|"_")* >}
+
+TOKEN : /* STATIC TOKENS */
+{
+  < _intconstant : (< DIGIT >)+ | ("0x" | "0X") (< DIGIT > |
+  	"a" | "A" | "b" | "B" | "c" | "C" | "d" | "D" |
+  	"e" | "E" | "f" | "F" )+ >
+|   < _doubleconstant : (< DIGIT >)+ "." (< DIGIT >)* |
+  	(< DIGIT >)+ "." (< DIGIT >)* ("E" | "e") ("+" | "-") (< DIGIT >)+>
+| < _stringconstant : "\"" (< LETTER > | < DIGIT >)+ "\"" >
+| < _booleanconstant : "true" | "false" >
+| < #DIGIT : [ "0"-"9" ] >
+| < #LETTER : [ "A"-"z" ] >
+}
+void Start() :{}{  (
+    < _plus > | < _minus > | < _multiplication > | < _division > |
+    < _mod > | < _assignop > | < _semicolon > | < _comma > | < _period > |
+    < _leftparen > | < _rightparen > | < _leftbracket > | < _rightbracket > |
+    < _leftbrace > | < _rightbrace > | < _less > | < _lessequal > |
+    < _greater > | < _greaterequal > | < _equal > | < _notequal > |
+    < _and > | < _or > | < _not > | < _boolean > | < _break > | < _class > |
+    < _double > | < _else > | < _extends > | < _for > | < _if > | < _implements > |
+    < _int > | < _interface > | < _new > | < _newarray > | < _null > |
+    < _println > | < _readln > | < _return > | < _string > | < _void > |
+    < _while > | < _id > | < _intconstant > | < _stringconstant > |
+    < _booleanconstant >
+  )*
+  ";"}
