@@ -63,13 +63,14 @@ TOKEN : /* STATIC TOKENS */
   	"a" | "A" | "b" | "B" | "c" | "C" | "d" | "D" |
   	"e" | "E" | "f" | "F" )+ >
 |   < _doubleconstant : (< DIGIT >)+ "." (< DIGIT >)* |
-  	(< DIGIT >)+ "." (< DIGIT >)* ("E" | "e") ("+" | "-") (< DIGIT >)+>
-| < _stringconstant : "\"" (< LETTER > | < DIGIT >)+ "\"" >
+  	(< DIGIT >)+ "." (< DIGIT >)* ("E" | "e") ("+" | "-")+ (< DIGIT >)+>
+| < _stringconstant : "\"" (< ALPHABET >)+ "\"" >
 | < _booleanconstant : "true" | "false" >
 | < #DIGIT : [ "0"-"9" ] >
 | < #LETTER : [ "A"-"z" ] >
+| < #ALPHABET : [" " - "~"] >
 }
-void Start() :{}{  (
+void Start() :{System.out.println(tokenImage[_and]);}{  (
     < _plus > | < _minus > | < _multiplication > | < _division > |
     < _mod > | < _assignop > | < _semicolon > | < _comma > | < _period > |
     < _leftparen > | < _rightparen > | < _leftbracket > | < _rightbracket > |
@@ -82,4 +83,4 @@ TOKEN : /* STATIC TOKENS */
     < _while > | < _id > | < _intconstant > | < _stringconstant > |
     < _booleanconstant >
   )*
-  ";"}
+  < EOF >}

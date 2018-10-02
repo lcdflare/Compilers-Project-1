@@ -112,6 +112,8 @@ public interface MyNewGrammarConstants {
   int DIGIT = 54;
   /** RegularExpression Id. */
   int LETTER = 55;
+  /** RegularExpression Id. */
+  int ALPHABET = 56;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -174,6 +176,7 @@ public interface MyNewGrammarConstants {
     "<_booleanconstant>",
     "<DIGIT>",
     "<LETTER>",
+    "<ALPHABET>",
   };
 
 }

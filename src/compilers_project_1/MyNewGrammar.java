@@ -33,6 +33,7 @@ public class MyNewGrammar implements MyNewGrammarConstants {
   }
 
   static final public void Start() throws ParseException {
+ System.out.println(tokenImage[_and]);
     label_1:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -241,7 +242,7 @@ public class MyNewGrammar implements MyNewGrammarConstants {
         throw new ParseException();
       }
     }
-    jj_consume_token(_semicolon);
+    jj_consume_token(0);
   }
 
   static private boolean jj_initialized_once = false;
@@ -403,7 +404,7 @@ public class MyNewGrammar implements MyNewGrammarConstants {
   /** Generate ParseException. */
   static public ParseException generateParseException() {
     jj_expentries.clear();
-    boolean[] la1tokens = new boolean[56];
+    boolean[] la1tokens = new boolean[57];
     if (jj_kind >= 0) {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
@@ -420,7 +421,7 @@ public class MyNewGrammar implements MyNewGrammarConstants {
         }
       }
     }
-    for (int i = 0; i < 56; i++) {
+    for (int i = 0; i < 57; i++) {
       if (la1tokens[i]) {
         jj_expentry = new int[1];
         jj_expentry[0] = i;

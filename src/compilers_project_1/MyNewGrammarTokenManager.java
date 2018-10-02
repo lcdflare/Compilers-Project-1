@@ -571,7 +571,7 @@ static private int jjMoveNfa_0(int startState, int curPos)
                      jjCheckNAdd(3);
                   break;
                case 3:
-                  if ((0x3ff000000000000L & l) != 0L)
+                  if ((0xffffffff00000000L & l) != 0L)
                      jjCheckNAddTwoStates(3, 4);
                   break;
                case 4:
@@ -635,7 +635,7 @@ static private int jjMoveNfa_0(int startState, int curPos)
                   break;
                case 26:
                   if ((0x280000000000L & l) != 0L)
-                     jjCheckNAdd(27);
+                     jjCheckNAddTwoStates(26, 27);
                   break;
                case 27:
                   if ((0x3ff000000000000L & l) == 0L)
@@ -685,7 +685,7 @@ static private int jjMoveNfa_0(int startState, int curPos)
                   jjCheckNAdd(1);
                   break;
                case 3:
-                  if ((0x7fffffffffffffeL & l) != 0L)
+                  if ((0x7fffffffffffffffL & l) != 0L)
                      jjAddStates(7, 8);
                   break;
                case 5:
@@ -778,7 +778,7 @@ public static final String[] jjstrLiteralImages = {
 "\151\155\160\154\145\155\145\156\164\163", "\151\156\164", "\151\156\164\145\162\146\141\143\145", "\156\145\167", 
 "\156\145\167\141\162\162\141\171", "\156\165\154\154", "\160\162\151\156\164\154\156", 
 "\162\145\141\144\154\156", "\162\145\164\165\162\156", "\163\164\162\151\156\147", "\166\157\151\144", 
-"\167\150\151\154\145", null, null, null, null, null, null, null, };
+"\167\150\151\154\145", null, null, null, null, null, null, null, null, };
 
 /** Lexer state names. */
 public static final String[] lexStateNames = {
