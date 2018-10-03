@@ -100,9 +100,9 @@ TOKEN : /* STATIC TOKENS */
 | < #ALPHABET : [" " - "~"] >
 }
 
-TOKEN : /* COMMENTS */
+SKIP : /* COMMENTS */
 {
-  < LINECOMMENT : "//" > // LINECOMMENTS should skip the entire line
+  < LINECOMMENT : "//" ( ~["\r", "\n"] )* > // Line comments should skip the entire line
 | < MULTILINECOMMENT : "/*" (< ALPHABET >)+ "*/" >
 }
 void Start() :{

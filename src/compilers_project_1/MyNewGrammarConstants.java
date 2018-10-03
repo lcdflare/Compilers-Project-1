@@ -181,7 +181,7 @@ public interface MyNewGrammarConstants {
     "<DIGIT>",
     "<LETTER>",
     "<ALPHABET>",
-    "\"//\"",
+    "<LINECOMMENT>",
     "<MULTILINECOMMENT>",
   };
 
