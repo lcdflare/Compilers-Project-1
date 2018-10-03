@@ -1,13 +1,42 @@
 /**
  * JavaCC template file created by SF JavaCC plugin 1.5.28+ wizard for JavaCC 1.5.0+
- */options{  static = true;}PARSER_BEGIN(MyNewGrammar)package compilers_project_1;
+ */options{  static = false;}PARSER_BEGIN( MyNewGrammar )package compilers_project_1;
+
+import java.util.List;
+import java.util.ArrayList;
+import java.io.FileNotFoundException;
+import java.io.FileInputStream;
 
 public class MyNewGrammar{
+ 
+  // trie 
   static int[] _switch = new int[51];
-  static char[] _symbol = new char[1000];
-  static int[] _next = new int[1000];
-    public static void main(String args []) throws ParseException  {    MyNewGrammar parser = new MyNewGrammar(System.in);    while (true)    {      System.out.println("Reading from standard input...");      try      {        MyNewGrammar.Start();
-        System.out.println ("MyNewGrammar: The input was readed sucessfully.");      }      catch (Exception e)      {        System.out.println("NOK.");        System.out.println(e.getMessage());        MyNewGrammar.ReInit(System.in);      }      catch (Error e)      {        System.out.println("Oops.");        System.out.println(e.getMessage());        break;      }    }  }}PARSER_END(MyNewGrammar)SKIP :{  " "| "\r"| "\t"| "\n"}TOKEN : /* OPERATORS */{  < _plus : "+" >| < _minus : "-" >| < _multiplication : "*" >| < _division : "/" >
+  static List<Character> _symbol = new ArrayList<Character>();
+  static List<Integer> _next = new ArrayList<Integer>();
+    public static void main( String args [] ) throws ParseException  {
+    MyNewGrammar parser = null;
+    
+    if ( args.length > 0 )
+    {
+      try
+      { 
+	      // We have a file to parse
+	      System.out.println( "file specified! Reading from file..." );
+	      parser = new MyNewGrammar( new FileInputStream( args[0] ) );
+	  }
+	  catch ( FileNotFoundException e )
+	  {
+	    System.out.println( "file not found! Terminating..." );
+	    return;
+	  }
+    }
+    else
+    {
+      System.out.println( "No file specified! Reading from standard input..." );
+      parser = new MyNewGrammar( System.in );
+    }
+        while ( true )    {      try      {        parser.Start();
+        System.out.println ( "MyNewGrammar: The input was read sucessfully." );      }      catch ( Exception e )      {        System.out.println( "NOK." );        System.out.println( e.getMessage() );        parser.ReInit( System.in );      }      catch ( Error e )      {        System.out.println( "Oops." );        System.out.println( e.getMessage() );        break;      }    }  }}PARSER_END( MyNewGrammar )SKIP :{  " "| "\r"| "\t"| "\n"}TOKEN : /* OPERATORS */{  < _plus : "+" >| < _minus : "-" >| < _multiplication : "*" >| < _division : "/" >
 | < _mod : "%" >
 | < _assignop : "=" >
 | < _semicolon : ";" >
@@ -70,7 +99,15 @@ TOKEN : /* STATIC TOKENS */
 | < #LETTER : [ "A"-"z" ] >
 | < #ALPHABET : [" " - "~"] >
 }
-void Start() :{System.out.println(tokenImage[_and]);}{  (
+
+TOKEN : /* COMMENTS */
+{
+  < LINECOMMENT : "//" > // LINECOMMENTS should skip the entire line
+| < MULTILINECOMMENT : "/*" (< ALPHABET >)+ "*/" >
+}
+void Start() :{
+}{
+  (
     < _plus > | < _minus > | < _multiplication > | < _division > |
     < _mod > | < _assignop > | < _semicolon > | < _comma > | < _period > |
     < _leftparen > | < _rightparen > | < _leftbracket > | < _rightbracket > |

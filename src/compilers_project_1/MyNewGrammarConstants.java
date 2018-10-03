@@ -114,6 +114,10 @@ public interface MyNewGrammarConstants {
   int LETTER = 55;
   /** RegularExpression Id. */
   int ALPHABET = 56;
+  /** RegularExpression Id. */
+  int LINECOMMENT = 57;
+  /** RegularExpression Id. */
+  int MULTILINECOMMENT = 58;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -177,6 +181,8 @@ public interface MyNewGrammarConstants {
     "<DIGIT>",
     "<LETTER>",
     "<ALPHABET>",
+    "\"//\"",
+    "<MULTILINECOMMENT>",
   };
 
 }
