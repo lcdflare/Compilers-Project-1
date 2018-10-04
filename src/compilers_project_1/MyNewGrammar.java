@@ -37,8 +37,8 @@ tokenName[0] = "EOF"; tokenName[4] = "EOL";
 
     if ( args.length > 0 )
     {
-      try
-      {
+          try
+          {
               // We have a file to parse
               System.out.println( "file specified! Reading from file..." );
               parser = new MyNewGrammar( new FileInputStream( args[0] ) );
@@ -48,43 +48,42 @@ tokenName[0] = "EOF"; tokenName[4] = "EOL";
             System.out.println( "file not found! Terminating..." );
             return;
           }
-    }
-    else
-    {
-      System.out.println( "No file specified! Reading from standard input..." );
-      parser = new MyNewGrammar( System.in );
-    }
+        }
+        else
+        {
+          System.out.println( "No file specified! Reading from standard input..." );
+          parser = new MyNewGrammar( System.in );
+        }
 
-    while ( true )
-    {
-      try
-      {
-        parser.trie = new Trie();
-        parser.Start();
-        System.out.println ( "MyNewGrammar: The input was read sucessfully." );
-      }
-      catch ( Exception e )
-      {
-        System.out.println( "NOK." );
+        try
+        {
+            parser.trie = new Trie();
+            parser.Start();
+        }
+        catch ( Exception e )
+        {
+            System.out.println( "NOK." );
+            System.out.println( e.getMessage() );
+            parser.ReInit( System.in );
+        }
+        catch ( Error e )
+        {
+                System.out.println( "Oops." );
         System.out.println( e.getMessage() );
-        parser.ReInit( System.in );
-      }
-      catch ( Error e )
-      {
-        System.out.println( "Oops." );
-        System.out.println( e.getMessage() );
-        break;
-      }
-    }
+        }
   }
 
   final public void Start() throws ParseException {
   while ( jj_ntk == -1 )
   {
          Token token = getNextToken();
-         System.out.print( token.toString() + " " );
+         //System.out.print( token.toString() + " " );
 
-         if ( tokenName[token.kind].equals( "EOL" ) )
+         if ( tokenName[token.kind].equals( "EOF" ) )
+         {
+           break;
+         }
+         else if ( tokenName[token.kind].equals( "EOL" ) )
          {
                 System.out.print( "\u005cn" );
          }
@@ -93,7 +92,7 @@ tokenName[0] = "EOF"; tokenName[4] = "EOL";
                 System.out.print( tokenName[token.kind] + " " );
          }
 
-         if( tokenName[token.kind].equals( "_id" ) )
+         if ( tokenName[token.kind].equals( "_id" ) )
          {
                 //trie.addIdentifier( token.toString() );
          }
@@ -306,6 +305,7 @@ tokenName[0] = "EOF"; tokenName[4] = "EOL";
         throw new ParseException();
       }
     }
+    jj_consume_token(0);
   }
 
   /** Generated Token Manager. */
