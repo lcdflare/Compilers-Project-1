@@ -13,8 +13,30 @@ public class MyNewGrammar implements MyNewGrammarConstants {
   static List<Character> _symbol = new ArrayList<Character>();
   static List<Integer> _next = new ArrayList<Integer>();
 
+  static String tokenName[] = new String[1000];
+
   public static void main( String args [] ) throws ParseException
   {
+tokenName[0] = "EOF";
+        tokenName[5] = "_plus"; tokenName[6] = "_minus"; tokenName[7] = "_multiplication";
+        tokenName[8] = "_division"; tokenName[9] = "_mod"; tokenName[10] = "_assignop";
+        tokenName[11] = "_semicolon"; tokenName[12] = "_comma"; tokenName[13] = "_period";
+        tokenName[14] = "_leftparen"; tokenName[15] = "_rightparen"; tokenName[16] = "_leftbracket";
+        tokenName[17] = "_rightbracket"; tokenName[18] = "_leftbrace"; tokenName[19] = "_rightbrace";
+        tokenName[20] = "_less"; tokenName[21] = "_lessequal"; tokenName[22] = "_greater";
+        tokenName[23] = "_greaterequal"; tokenName[24] = "_equal"; tokenName[25] = "_notequal";
+        tokenName[26] = "_and"; tokenName[27] = "_or"; tokenName[28] = "_not";
+        tokenName[29] = "_boolean"; tokenName[30] = "_break"; tokenName[31] = "_class";
+        tokenName[32] = "_double"; tokenName[33] = "_else"; tokenName[34] = "_extends";
+        tokenName[35] = "_for"; tokenName[36] = "_if"; tokenName[37] = "_implements";
+        tokenName[38] = "_int"; tokenName[39] = "_interface"; tokenName[40] = "_new";
+        tokenName[41] = "_newarray"; tokenName[42] = "_null"; tokenName[43] = "_println";
+        tokenName[44] = "_readln"; tokenName[45] = "_return"; tokenName[46] = "_string";
+        tokenName[47] = "_void"; tokenName[48] = "_while"; tokenName[49] = "_booleanconstant";
+        tokenName[50] = "_id"; tokenName[51] = "_intconstant"; tokenName[52] = "_doubleconstant";
+        tokenName[53] = "_stringconstant"; tokenName[54] = "DIGIT"; tokenName[55] = "LETTER";
+        tokenName[56] = "ALPHABET"; tokenName[57] = "LINECOMMENT"; tokenName[58] = "MULTILINECOMMENT";
+
     MyNewGrammar parser = null;
 
     if ( args.length > 0 )
@@ -63,7 +85,8 @@ public class MyNewGrammar implements MyNewGrammarConstants {
   while ( jj_ntk == -1 )
   {
      Token token = getNextToken();
-     System.out.println( token.image );
+     System.out.println( token.toString() );
+     System.out.println( tokenName[token.kind] );
   }
     label_1:
     while (true) {
@@ -112,10 +135,10 @@ public class MyNewGrammar implements MyNewGrammarConstants {
       case _string:
       case _void:
       case _while:
+      case _booleanconstant:
       case _id:
       case _intconstant:
       case _stringconstant:
-      case _booleanconstant:
         ;
         break;
       default:
@@ -295,7 +318,7 @@ public class MyNewGrammar implements MyNewGrammarConstants {
       jj_la1_0 = new int[] {0xffffffe0,0xffffffe0,};
    }
    private static void jj_la1_init_1() {
-      jj_la1_1 = new int[] {0x37ffff,0x37ffff,};
+      jj_la1_1 = new int[] {0x2fffff,0x2fffff,};
    }
 
   /** Constructor with InputStream. */

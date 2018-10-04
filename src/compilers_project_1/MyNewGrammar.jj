@@ -15,7 +15,7 @@ public class MyNewGrammar{
   static List<Integer> _next = new ArrayList<Integer>();
   
   static String tokenName[] = new String[1000];
-    public static void main( String args [] ) throws ParseException  {
+    public static void main( String args [] ) throws ParseException
   {
 tokenName[0] = "EOF";
 	tokenName[5] = "_plus"; tokenName[6] = "_minus"; tokenName[7] = "_multiplication";
