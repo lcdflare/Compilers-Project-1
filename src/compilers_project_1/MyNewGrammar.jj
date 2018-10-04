@@ -17,7 +17,7 @@ public class MyNewGrammar{
   static String tokenName[] = new String[1000];
     public static void main( String args [] ) throws ParseException  {
   {
-	tokenName[0] = "EOF";
+tokenName[0] = "EOF";
 	tokenName[5] = "_plus"; tokenName[6] = "_minus"; tokenName[7] = "_multiplication";
 	tokenName[8] = "_division"; tokenName[9] = "_mod"; tokenName[10] = "_assignop";
 	tokenName[11] = "_semicolon"; tokenName[12] = "_comma"; tokenName[13] = "_period";
@@ -32,9 +32,9 @@ public class MyNewGrammar{
 	tokenName[38] = "_int"; tokenName[39] = "_interface"; tokenName[40] = "_new";
 	tokenName[41] = "_newarray"; tokenName[42] = "_null"; tokenName[43] = "_println";
 	tokenName[44] = "_readln"; tokenName[45] = "_return"; tokenName[46] = "_string";
-	tokenName[47] = "_void"; tokenName[48] = "_while"; tokenName[49] = "_id";
-	tokenName[50] = "_intconstant"; tokenName[51] = "_doubleconstant"; tokenName[52] = "_stringconstant";
-	tokenName[53] = "_booleanconstant"; tokenName[54] = "DIGIT"; tokenName[55] = "LETTER";
+	tokenName[47] = "_void"; tokenName[48] = "_while"; tokenName[49] = "_booleanconstant";
+	tokenName[50] = "_id"; tokenName[51] = "_intconstant"; tokenName[52] = "_doubleconstant";
+	tokenName[53] = "_stringconstant"; tokenName[54] = "DIGIT"; tokenName[55] = "LETTER";
 	tokenName[56] = "ALPHABET"; tokenName[57] = "LINECOMMENT"; tokenName[58] = "MULTILINECOMMENT";
 
     MyNewGrammar parser = null;
@@ -107,7 +107,15 @@ TOKEN : /* RESERVED */
 | < _string : "string" >
 | < _void : "void" >
 | < _while : "while" >
-}TOKEN : /* IDENTIFIER */{  < _id : < LETTER >(< LETTER >|< DIGIT >|"_")* >}
+}TOKEN : /* BOOLEAN CONSTANT */
+{
+  < _booleanconstant : "true" | "false" >
+}
+
+TOKEN : /* IDENTIFIER */
+{
+  < _id : < LETTER >(< LETTER >|< DIGIT >|"_")* >
+}
 
 TOKEN : /* STATIC TOKENS */
 {
@@ -117,7 +125,6 @@ TOKEN : /* STATIC TOKENS */
 |   < _doubleconstant : (< DIGIT >)+ "." (< DIGIT >)* |
   	(< DIGIT >)+ "." (< DIGIT >)* ("E" | "e") ("+" | "-")? (< DIGIT >)+>
 | < _stringconstant : "\"" (< ALPHABET >)+ "\"" >
-| < _booleanconstant : "true" | "false" >
 | < #DIGIT : [ "0"-"9" ] >
 | < #LETTER : [ "A"-"z" ] >
 | < #ALPHABET : [" " - "~"] >
