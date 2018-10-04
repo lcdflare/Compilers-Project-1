@@ -99,15 +99,15 @@ public interface MyNewGrammarConstants {
   /** RegularExpression Id. */
   int _while = 48;
   /** RegularExpression Id. */
-  int _id = 49;
+  int _booleanconstant = 49;
   /** RegularExpression Id. */
-  int _intconstant = 50;
+  int _id = 50;
   /** RegularExpression Id. */
-  int _doubleconstant = 51;
+  int _intconstant = 51;
   /** RegularExpression Id. */
-  int _stringconstant = 52;
+  int _doubleconstant = 52;
   /** RegularExpression Id. */
-  int _booleanconstant = 53;
+  int _stringconstant = 53;
   /** RegularExpression Id. */
   int DIGIT = 54;
   /** RegularExpression Id. */
@@ -173,11 +173,11 @@ public interface MyNewGrammarConstants {
     "\"string\"",
     "\"void\"",
     "\"while\"",
+    "<_booleanconstant>",
     "<_id>",
     "<_intconstant>",
     "<_doubleconstant>",
     "<_stringconstant>",
-    "<_booleanconstant>",
     "<DIGIT>",
     "<LETTER>",
     "<ALPHABET>",
