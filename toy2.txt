@@ -1,0 +1,67 @@
+class newClass ( double doubel ) extends nothing
+{
+	double doubel ( int x, boolean y )
+	{
+		if ( doubel > 0.5E+2 || y == true )
+		{
+			for ( int i = 0; i < 10; i++ )
+			{
+				x = x * 2 - 5;
+				println( "This is a string that I am printing. x = " + x );
+				
+				if ( x > 100 ) 
+				{
+					break;
+				}
+				else
+				{
+					x += 10;
+				}
+			}
+			
+			y = !y;
+		}
+		
+		// This is a comment
+		double [] z = newarray double;
+		
+		while ( 1 ) 
+		{
+			// This does nothing
+			String s = readln();
+			if ( s == null ) 
+				return;
+		}
+	}
+}
+
+// Comments
+// are
+// fun
+
+int integer = new int;
+
+/* This is a multi-line comment*/
+
+boolean bool = false;
+
+/* This is a multi-line comment
+*  that uses
+*  multiple
+*  lines!!!!*/
+
+interface if implements something
+{
+	void theVoid( string [] args )
+	{
+		if ( args[0] == "arg" && args[1] >= 205 )
+			println( "This is the void" );
+		return;
+	}
+	
+	int insane = 0x3453AFE
+	class classClassclassLassclass = new class
+	double voidddvoid = new void();
+}
+
+// This is the end of the file
