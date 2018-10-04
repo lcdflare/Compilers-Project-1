@@ -2,17 +2,13 @@
  * JavaCC template file created by SF JavaCC plugin 1.5.28+ wizard for JavaCC 1.5.0+
  */options{  static = false;}PARSER_BEGIN( MyNewGrammar )package compilers_project_1;
 
-import java.util.List;
-import java.util.ArrayList;
 import java.io.FileNotFoundException;
 import java.io.FileInputStream;
 
 public class MyNewGrammar{
  
-  // trie 
-  static int[] _switch = new int[51];
-  static List<Character> _symbol = new ArrayList<Character>();
-  static List<Integer> _next = new ArrayList<Integer>();
+  // trie
+  public Trie trie;
   
   static String tokenName[] = new String[1000];
     public static void main( String args [] ) throws ParseException
@@ -58,7 +54,8 @@ tokenName[0] = "EOF";
       System.out.println( "No file specified! Reading from standard input..." );
       parser = new MyNewGrammar( System.in );
     }
-        while ( true )    {      try      {        parser.Start();
+        while ( true )    {      try      {
+        parser.trie = new Trie();        parser.Start();
         System.out.println ( "MyNewGrammar: The input was read sucessfully." );      }      catch ( Exception e )      {        System.out.println( "NOK." );        System.out.println( e.getMessage() );        parser.ReInit( System.in );      }      catch ( Error e )      {        System.out.println( "Oops." );        System.out.println( e.getMessage() );        break;      }    }  }}PARSER_END( MyNewGrammar )SKIP :{  " "| "\r"| "\t"| "\n"}TOKEN : /* OPERATORS */{  < _plus : "+" >| < _minus : "-" >| < _multiplication : "*" >| < _division : "/" >
 | < _mod : "%" >
 | < _assignop : "=" >
