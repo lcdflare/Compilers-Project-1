@@ -37,22 +37,24 @@ tokenName[0] = "EOF"; tokenName[4] = "EOL";
 
     if ( args.length > 0 )
     {
-          try
-          {
-              // We have a file to parse
-              System.out.println( "file specified! Reading from file..." );
-              parser = new MyNewGrammar( new FileInputStream( args[0] ) );
-          }
-          catch ( FileNotFoundException e )
-          {
-            System.out.println( "file not found! Terminating..." );
-            return;
-          }
+                try
+                {
+                // We have a file to parse
+                System.out.println( "file specified! Reading from file...\u005cn" );
+                parser = new MyNewGrammar( new FileInputStream( args[0] ) );
+                }
+                catch ( FileNotFoundException e )
+                {
+                    // Specified file doesn't exist so don't go any further
+                    System.out.println( "file not found! Terminating..." );
+                    return;
+                }
         }
         else
         {
-          System.out.println( "No file specified! Reading from standard input..." );
-          parser = new MyNewGrammar( System.in );
+                // Default to console input
+                System.out.println( "No file specified! Reading from standard input...\u005cn" );
+                parser = new MyNewGrammar( System.in );
         }
 
         try
@@ -74,29 +76,40 @@ tokenName[0] = "EOF"; tokenName[4] = "EOL";
   }
 
   final public void Start() throws ParseException {
-  while ( jj_ntk == -1 )
-  {
-         Token token = getNextToken();
-         //System.out.print( token.toString() + " " );
+        while ( jj_ntk == -1 )
+        {
+                // Get the next token
+                Token token = getNextToken();
+                //System.out.print( token.toString() + " " );
 
-         if ( tokenName[token.kind].equals( "EOF" ) )
-         {
-           break;
-         }
-         else if ( tokenName[token.kind].equals( "EOL" ) )
-         {
-                System.out.print( "\u005cn" );
-         }
-         else
-         {
-                System.out.print( tokenName[token.kind] + " " );
-         }
+                if ( tokenName[token.kind].equals( "EOF" ) )
+                {
+                        // End of File. Terminate
+                        break;
+                }
+                else if ( tokenName[token.kind].equals( "EOL" ) )
+                {
+                        // New line 
+                        System.out.print( "\u005cn" );
+                }
+                else
+                {
+                        // Print the type of token we're parsing
+                        System.out.print( tokenName[token.kind] + " " );
 
-         if ( tokenName[token.kind].equals( "_id" ) )
-         {
-                //trie.addIdentifier( token.toString() );
-         }
-  }
+                        // Is this an identifier?
+                        if ( tokenName[token.kind].equals( "_id" ) )
+                        {
+                                // Add if to the symbol table
+                                trie.addIdentifier( token.toString() );
+                        }
+                }
+
+        }
+
+        // Print the symbol table
+        System.out.print( "\u005cn\u005cnPrinting trie...\u005cn\u005cn " );
+        trie.display();
     label_1:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
