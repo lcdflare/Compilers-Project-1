@@ -27,7 +27,7 @@ public class Trie {
 			_switch[ascii] = currentEnd;
 			create(id);
 		}
-		else {
+		else if ( id.length() != 0 ){
 			valueOfSymbol = getNextSymbol();
 			boolean exit = false;
 			while (!exit) {
@@ -72,17 +72,97 @@ public class Trie {
 	}
 	
 	/** Display trie **/
-	public void display() {
-		for(int i = 0; i < 52; i++)
-			System.out.print(_switch[i] + " ");
-		System.out.println();
-		for(int i = 0; i < 20; i++) {
-			System.out.print(_symbol[i] + " ");
+	public void display() {	
+		
+		// Print the switch table
+		for ( int j = 0; j < Math.ceil( 52 / 20.0 ); j++ )
+		{
+			// Store the number of symbols parsed for efficiency
+			int curLine = j * 20;
+			
+			System.out.print("\n\n           " );
+			for( int i = 0; i < 20; i++ )
+			{
+				int curNum = i + curLine;
+				
+				// Don't go past the table limits
+				if ( curNum >= 52 )
+				{
+					break;
+				}
+				
+				int ascii = curNum;
+				
+				if( ascii < 26 ) 
+				{
+					ascii += 65;
+				}
+				else 
+				{
+					ascii += 71;
+				}
+				
+				System.out.print( (char) ascii + "   " );
+			}
+			
+			System.out.print( "\nswitch:   " );
+			for( int i = 0; i < 20; i++ )
+			{
+				int curNum = i + curLine;
+				
+				// Don't go past the table limits
+				if ( curNum >= 52 )
+				{
+					break;
+				}
+				
+				if ( _switch[curNum] < 10 && _switch[curNum] != -1 )
+				{
+					System.out.print( " " + _switch[curNum] + "  " );
+				}
+				else
+				{
+					System.out.print( _switch[curNum] + "  " );
+				}
+			}
 		}
-		System.out.println();
-		for(int i = 0; i < 20; i++) {
-			System.out.print(_next[i] + " ");
+		
+		// Print the symbol table
+		for ( int j = 0; j < Math.ceil( currentEnd / 20.0 ); j++ )
+		{
+			// Store the number of symbols parsed for efficiency
+			int curLine = j * 20;
+			
+			System.out.print("\n\n          " );
+			for( int i = 0; i < 20; i++ )
+			{
+				int curNum = i + curLine;
+				
+				if ( curNum < 10 )
+				{
+					System.out.print( " " );
+				}
+				System.out.print( curNum + "  " );				
+			}
+			
+			System.out.print( "\nsymbol:   " );
+			for( int i = 0; i < 20; i++ ) 
+			{
+				System.out.print( " " + _symbol[i + curLine] + "  ");
+			}
+			
+			System.out.print( "\nnext:     " );
+			for( int i = 0; i < 20; i++ ) 
+			{
+				if ( _next[i + curLine] < 10 )
+				{
+					System.out.print( " " + _next[i + curLine] + "  " );
+				}
+				else
+				{
+					System.out.print( _next[i + curLine] + "  " );
+				}
+			}
 		}
-		System.out.println();
 	}
 }
