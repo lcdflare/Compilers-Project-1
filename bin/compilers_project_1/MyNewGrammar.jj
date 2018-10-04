@@ -13,7 +13,7 @@ public class MyNewGrammar{
   static String tokenName[] = new String[1000];
     public static void main( String args [] ) throws ParseException
   {
-tokenName[0] = "EOF";
+tokenName[0] = "EOF"; tokenName[4] = "EOL";
 	tokenName[5] = "_plus"; tokenName[6] = "_minus"; tokenName[7] = "_multiplication";
 	tokenName[8] = "_division"; tokenName[9] = "_mod"; tokenName[10] = "_assignop";
 	tokenName[11] = "_semicolon"; tokenName[12] = "_comma"; tokenName[13] = "_period";
@@ -31,7 +31,7 @@ tokenName[0] = "EOF";
 	tokenName[47] = "_void"; tokenName[48] = "_while"; tokenName[49] = "_booleanconstant";
 	tokenName[50] = "_id"; tokenName[51] = "_intconstant"; tokenName[52] = "_doubleconstant";
 	tokenName[53] = "_stringconstant"; tokenName[54] = "DIGIT"; tokenName[55] = "LETTER";
-	tokenName[56] = "ALPHABET"; tokenName[57] = "LINECOMMENT"; tokenName[58] = "MULTILINECOMMENT";
+	tokenName[56] = "ALPHABET";
 
     MyNewGrammar parser = null;
     
@@ -56,7 +56,13 @@ tokenName[0] = "EOF";
     }
         while ( true )    {      try      {
         parser.trie = new Trie();        parser.Start();
-        System.out.println ( "MyNewGrammar: The input was read sucessfully." );      }      catch ( Exception e )      {        System.out.println( "NOK." );        System.out.println( e.getMessage() );        parser.ReInit( System.in );      }      catch ( Error e )      {        System.out.println( "Oops." );        System.out.println( e.getMessage() );        break;      }    }  }}PARSER_END( MyNewGrammar )SKIP :{  " "| "\r"| "\t"| "\n"}TOKEN : /* OPERATORS */{  < _plus : "+" >| < _minus : "-" >| < _multiplication : "*" >| < _division : "/" >
+        System.out.println ( "MyNewGrammar: The input was read sucessfully." );      }      catch ( Exception e )      {        System.out.println( "NOK." );        System.out.println( e.getMessage() );        parser.ReInit( System.in );      }      catch ( Error e )      {        System.out.println( "Oops." );        System.out.println( e.getMessage() );        break;      }    }  }}PARSER_END( MyNewGrammar )SKIP :{  " "| "\t"
+| "\r"}
+
+TOKEN : /* END OF LINE */
+{
+  < EOL : "\n" >
+}TOKEN : /* OPERATORS */{  < _plus : "+" >| < _minus : "-" >| < _multiplication : "*" >| < _division : "/" >
 | < _mod : "%" >
 | < _assignop : "=" >
 | < _semicolon : ";" >
@@ -130,17 +136,33 @@ TOKEN : /* STATIC TOKENS */
 SKIP : /* COMMENTS */
 {
   < LINECOMMENT : "//" ( ~["\r", "\n"] )* > // Line comments should skip the entire line
-| < MULTILINECOMMENT : "/*" (< ALPHABET >)+ "*/" >
+| < ML_COMMENT_START : "/*" > : IN_ML_COMMENT
+}
+
+< IN_ML_COMMENT > SKIP :
+{
+  < ML_COMMENT_END : "*/" > : DEFAULT
+| < ~[] >
 }
 void Start() :{
   while ( jj_ntk == -1 )
   {
-     Token token = getNextToken();
-     System.out.println( token.toString() );
-     System.out.println( tokenName[token.kind] );
-     if(tokenName[token.kind] == "_id")
-     trie.addIdentifier(token.toString());
-     trie.display();
+	 Token token = getNextToken();
+	 System.out.print( token.toString() + " " );
+	
+	 if ( tokenName[token.kind].equals( "EOL" ) )
+	 {
+   		System.out.print( "\n" );
+	 }
+	 else
+	 { 
+	 	System.out.print( tokenName[token.kind] + " " );
+	 }
+	 
+	 if( tokenName[token.kind].equals( "_id" ) )
+	 { 
+	 	//trie.addIdentifier( token.toString() );
+	 }
   }
 }{
   (

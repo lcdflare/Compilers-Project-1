@@ -11,6 +11,8 @@ public interface MyNewGrammarConstants {
   /** End of File. */
   int EOF = 0;
   /** RegularExpression Id. */
+  int EOL = 4;
+  /** RegularExpression Id. */
   int _plus = 5;
   /** RegularExpression Id. */
   int _minus = 6;
@@ -117,17 +119,21 @@ public interface MyNewGrammarConstants {
   /** RegularExpression Id. */
   int LINECOMMENT = 57;
   /** RegularExpression Id. */
-  int MULTILINECOMMENT = 58;
+  int ML_COMMENT_START = 58;
+  /** RegularExpression Id. */
+  int ML_COMMENT_END = 59;
 
   /** Lexical state. */
   int DEFAULT = 0;
+  /** Lexical state. */
+  int IN_ML_COMMENT = 1;
 
   /** Literal token values. */
   String[] tokenImage = {
     "<EOF>",
     "\" \"",
-    "\"\\r\"",
     "\"\\t\"",
+    "\"\\r\"",
     "\"\\n\"",
     "\"+\"",
     "\"-\"",
@@ -182,7 +188,9 @@ public interface MyNewGrammarConstants {
     "<LETTER>",
     "<ALPHABET>",
     "<LINECOMMENT>",
-    "<MULTILINECOMMENT>",
+    "\"/*\"",
+    "\"*/\"",
+    "<token of kind 60>",
   };
 
 }

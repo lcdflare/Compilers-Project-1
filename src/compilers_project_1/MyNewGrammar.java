@@ -13,7 +13,7 @@ public class MyNewGrammar implements MyNewGrammarConstants {
 
   public static void main( String args [] ) throws ParseException
   {
-tokenName[0] = "EOF";
+tokenName[0] = "EOF"; tokenName[4] = "EOL";
         tokenName[5] = "_plus"; tokenName[6] = "_minus"; tokenName[7] = "_multiplication";
         tokenName[8] = "_division"; tokenName[9] = "_mod"; tokenName[10] = "_assignop";
         tokenName[11] = "_semicolon"; tokenName[12] = "_comma"; tokenName[13] = "_period";
@@ -31,7 +31,7 @@ tokenName[0] = "EOF";
         tokenName[47] = "_void"; tokenName[48] = "_while"; tokenName[49] = "_booleanconstant";
         tokenName[50] = "_id"; tokenName[51] = "_intconstant"; tokenName[52] = "_doubleconstant";
         tokenName[53] = "_stringconstant"; tokenName[54] = "DIGIT"; tokenName[55] = "LETTER";
-        tokenName[56] = "ALPHABET"; tokenName[57] = "LINECOMMENT"; tokenName[58] = "MULTILINECOMMENT";
+        tokenName[56] = "ALPHABET";
 
     MyNewGrammar parser = null;
 
@@ -81,12 +81,22 @@ tokenName[0] = "EOF";
   final public void Start() throws ParseException {
   while ( jj_ntk == -1 )
   {
-     Token token = getNextToken();
-     System.out.println( token.toString() );
-     System.out.println( tokenName[token.kind] );
-     if(tokenName[token.kind] == "_id")
-     trie.addIdentifier(token.toString());
-     trie.display();
+         Token token = getNextToken();
+         System.out.print( token.toString() + " " );
+
+         if ( tokenName[token.kind].equals( "EOL" ) )
+         {
+                System.out.print( "\u005cn" );
+         }
+         else
+         {
+                System.out.print( tokenName[token.kind] + " " );
+         }
+
+         if( tokenName[token.kind].equals( "_id" ) )
+         {
+                //trie.addIdentifier( token.toString() );
+         }
   }
     label_1:
     while (true) {
@@ -435,7 +445,7 @@ tokenName[0] = "EOF";
   /** Generate ParseException. */
   public ParseException generateParseException() {
     jj_expentries.clear();
-    boolean[] la1tokens = new boolean[59];
+    boolean[] la1tokens = new boolean[61];
     if (jj_kind >= 0) {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
@@ -452,7 +462,7 @@ tokenName[0] = "EOF";
         }
       }
     }
-    for (int i = 0; i < 59; i++) {
+    for (int i = 0; i < 61; i++) {
       if (la1tokens[i]) {
         jj_expentry = new int[1];
         jj_expentry[0] = i;
