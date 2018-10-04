@@ -1,5 +1,7 @@
 package compilers_project_1;
 
+// Trie-based symbol table for storing tokens
+
 public class Trie {
 	// trie 
 	int[] _switch = new int[52];
