@@ -141,6 +141,9 @@ SKIP : /* COMMENTS */
      Token token = getNextToken();
      System.out.println( token.toString() );
      System.out.println( tokenName[token.kind] );
+     if(tokenName[token.kind] == "_id")
+     trie.addIdentifier(token.toString());
+     trie.display();
   }
 }{
   (
